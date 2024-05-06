@@ -1,3 +1,9 @@
+import sys
+
+class DevNull:
+    def write(self, msg):
+        pass
+
 def calculoPorcentagem(value, perguntasFeitas):
     value: float = (100*value)/perguntasFeitas
     return value
@@ -59,145 +65,153 @@ Jogos: dict = {
     "XCOM 2": 0,
 }
 
-EstiloDeJogo = int(input("Qual estilo de jogo você deseja?\n"
-                         "[1] FPS\n"
-                         "[2] Battle Royale\n"
-                         "[3] Corrida\n"
-                         "[4] RPG\n"
-                         "[5] MMORPG\n"
-                         "[6] Mobile\n"
-                         "[7] Rogue Like\n"
-                         "[8] Souls Like\n"
-                         "[9] Estratégia\n"
-                         "[10] Exploração\n"
-                         "[11] Terror\n"
-                         "Digite sua opção: "))
- 
-perguntasFeitas +=1
+try:
+    EstiloDeJogo = int(input("Qual estilo de jogo você deseja?\n"
+                            "[1] FPS\n"
+                            "[2] Battle Royale\n"
+                            "[3] Corrida\n"
+                            "[4] RPG\n"
+                            "[5] MMORPG\n"
+                            "[6] Mobile\n"
+                            "[7] Rogue Like\n"
+                            "[8] Souls Like\n"
+                            "[9] Estratégia\n"
+                            "[10] Exploração\n"
+                            "[11] Terror\n"
+                            "Digite sua opção: "))
+    
+    perguntasFeitas +=1
 
-# Se o estilo de Jogo for FPS:
-if EstiloDeJogo == 1:
-    Jogos["PUBG"] += 1
-    Jogos["Apex Legends"] += 1
-    Jogos["Counter-Strike 2"] += 1
-    Jogos["Call of Duty Mobile"] += 1
-    Jogos["Call of Duty Warzone"] += 1
-    Jogos["CrossFire"] += 1
-    Jogos["Payday 2"] += 1
-    Jogos["FarCry"] += 1
-    Jogos["Cyberpunk"] += 1
-    Jogos["ARK Survival"] += 1
-    Jogos["The Forest"] += 1
+    # Se o estilo de Jogo for FPS:
+    if EstiloDeJogo == 1:
+        Jogos["PUBG"] += 1
+        Jogos["Apex Legends"] += 1
+        Jogos["Counter-Strike 2"] += 1
+        Jogos["Call of Duty Mobile"] += 1
+        Jogos["Call of Duty Warzone"] += 1
+        Jogos["CrossFire"] += 1
+        Jogos["Payday 2"] += 1
+        Jogos["FarCry"] += 1
+        Jogos["Cyberpunk"] += 1
+        Jogos["ARK Survival"] += 1
+        Jogos["The Forest"] += 1
 
-# Se o estilo de Jogo for Battle Royale:
-elif EstiloDeJogo == 2:
-    Jogos["PUBG"] += 1
-    Jogos["Fortnite"] += 1
-    Jogos["Call of Duty Warzone"] += 1
-    Jogos["Free Fire"] += 1
+    # Se o estilo de Jogo for Battle Royale:
+    elif EstiloDeJogo == 2:
+        Jogos["PUBG"] += 1
+        Jogos["Fortnite"] += 1
+        Jogos["Call of Duty Warzone"] += 1
+        Jogos["Free Fire"] += 1
 
-# Se o estilo de Jogo for Corrida:
-elif EstiloDeJogo == 3:
-    Jogos["Forza"] += 1
-    Jogos["Grid"] += 1
-    Jogos["Mario Kart"] += 1
-    Jogos["Speed Drifters"] += 1
-    Jogos["Need For Speed"] += 1
-    Jogos["Rocket League"] += 1
+    # Se o estilo de Jogo for Corrida:
+    elif EstiloDeJogo == 3:
+        Jogos["Forza"] += 1
+        Jogos["Grid"] += 1
+        Jogos["Mario Kart"] += 1
+        Jogos["Speed Drifters"] += 1
+        Jogos["Need For Speed"] += 1
+        Jogos["Rocket League"] += 1
 
-# Se o estilo de Jogo for RPG:
-elif EstiloDeJogo == 4:
-    Jogos["Minecraft"] += 1
-    Jogos["Gwent"] += 1
-    Jogos["Resident Evil"] += 1
-    Jogos["Hearthstone: Heroes of Warcraft"] += 1
-    Jogos["Assassin's Creed"] += 1
-    Jogos["Slime Rancher"] += 1
-    Jogos["Just Cause"] += 1
-    Jogos["ARK Survival"] += 1
-    Jogos["The Forest"] += 1
-    Jogos["The Witcher"] += 1
-    Jogos["Elden Ring"] += 1
-    Jogos["FarCry"] += 1
-    Jogos["Read Dead Redemption 2"] += 1
-    Jogos["Cyberpunk"] += 1
-    Jogos["Hollow Knight"] += 1
-    Jogos["New World"] += 1
-    Jogos["Albion Online"] += 1
-    Jogos["Hades"] += 1
-    Jogos["Watch Dogs"] += 1
+    # Se o estilo de Jogo for RPG:
+    elif EstiloDeJogo == 4:
+        Jogos["Minecraft"] += 1
+        Jogos["Gwent"] += 1
+        Jogos["Resident Evil"] += 1
+        Jogos["Hearthstone: Heroes of Warcraft"] += 1
+        Jogos["Assassin's Creed"] += 1
+        Jogos["Slime Rancher"] += 1
+        Jogos["Just Cause"] += 1
+        Jogos["ARK Survival"] += 1
+        Jogos["The Forest"] += 1
+        Jogos["The Witcher"] += 1
+        Jogos["Elden Ring"] += 1
+        Jogos["FarCry"] += 1
+        Jogos["Read Dead Redemption 2"] += 1
+        Jogos["Cyberpunk"] += 1
+        Jogos["Hollow Knight"] += 1
+        Jogos["New World"] += 1
+        Jogos["Albion Online"] += 1
+        Jogos["Hades"] += 1
+        Jogos["Watch Dogs"] += 1
 
-# Se o estilo de Jogo for MMORPG:
-elif EstiloDeJogo == 5:
-    Jogos["New World"] += 1
-    Jogos["Albion Online"] += 1
-    Jogos["Dauntless"] += 1
-    Jogos["Path of Exile"] += 1
-    
-# Se o estilo de Jogo for Mobile:
-elif EstiloDeJogo == 6:
-    Jogos["Minecraft"] += 1
-    Jogos["Hearthstone: Heroes of Warcraft"] += 1
-    Jogos["Call of Duty Mobile"] += 1
-    Jogos["Among Us"] += 1
-    Jogos["Free Fire"] += 1
-    Jogos["Roblox"] += 1
-    
-# Se o estilo de Jogo for Rogue Like:
-elif EstiloDeJogo == 7:
-    Jogos["Hollow Knight"] += 1
-    Jogos["Hades"] += 1
-    
-# Se o estilo de Jogo for Souls Like:
-elif EstiloDeJogo == 8:
-    Jogos["Ghost of Tsushima"] += 1
-    Jogos["Elden Ring"] += 1
-    Jogos["Hollow Knight"] += 1
-    Jogos["Dark Souls"] += 1
-    Jogos["BloodBorn"] += 1
-    
-# Se o estilo de Jogo for Estratégia:
-elif EstiloDeJogo == 9:
-    Jogos["Hearthstone: Heroes of Warcraft"] += 1
-    Jogos["Among Us"] += 1
-    Jogos["Dota 2"] += 1
-    Jogos["FIFA"] += 1
-    Jogos["League of Legends"] += 1
-    Jogos["Gwent"] += 1
-    Jogos["Golf Simulator"] += 1
-    Jogos["XCOM 2"] += 1
-    
-# Se o estilo de Jogo for Exploração:
-elif EstiloDeJogo == 10:
-    Jogos["Minecraft"] += 1
-    Jogos["Resident Evil"] += 1
-    Jogos["Assassin's Creed"] += 1
-    Jogos["Slime Rancher"] += 1
-    Jogos["Just Cause"] += 1
-    Jogos["Outer Wilds"] += 1
-    Jogos["Star Wars: Jedi Fallen Order"] += 1
-    Jogos["ARK Survival"] += 1
-    Jogos["The Forest"] += 1
-    Jogos["The Witcher"] += 1
-    Jogos["Watch Dogs"] += 1
-    Jogos["Ghost of Tsushima"] += 1
-    Jogos["Elden Ring"] += 1
-    Jogos["FarCry"] += 1
-    Jogos["Read Dead Redemption 2"] += 1
-    Jogos["Cyberpunk"] += 1
-    Jogos["Hollow Knight"] += 1
-    
-# Se o estilo de Jogo for Terror:
-elif EstiloDeJogo == 11:
-    Jogos["Out Last"] += 1
-    Jogos["Resident Evil"] += 1
-    Jogos["Escape The Backrooms"] += 1
-    Jogos["Project Zomboid"] += 1
+    # Se o estilo de Jogo for MMORPG:
+    elif EstiloDeJogo == 5:
+        Jogos["New World"] += 1
+        Jogos["Albion Online"] += 1
+        Jogos["Dauntless"] += 1
+        Jogos["Path of Exile"] += 1
+        
+    # Se o estilo de Jogo for Mobile:
+    elif EstiloDeJogo == 6:
+        Jogos["Minecraft"] += 1
+        Jogos["Hearthstone: Heroes of Warcraft"] += 1
+        Jogos["Call of Duty Mobile"] += 1
+        Jogos["Among Us"] += 1
+        Jogos["Free Fire"] += 1
+        Jogos["Roblox"] += 1
+        
+    # Se o estilo de Jogo for Rogue Like:
+    elif EstiloDeJogo == 7:
+        Jogos["Hollow Knight"] += 1
+        Jogos["Hades"] += 1
+        
+    # Se o estilo de Jogo for Souls Like:
+    elif EstiloDeJogo == 8:
+        Jogos["Ghost of Tsushima"] += 1
+        Jogos["Elden Ring"] += 1
+        Jogos["Hollow Knight"] += 1
+        Jogos["Dark Souls"] += 1
+        Jogos["BloodBorn"] += 1
+        
+    # Se o estilo de Jogo for Estratégia:
+    elif EstiloDeJogo == 9:
+        Jogos["Hearthstone: Heroes of Warcraft"] += 1
+        Jogos["Among Us"] += 1
+        Jogos["Dota 2"] += 1
+        Jogos["FIFA"] += 1
+        Jogos["League of Legends"] += 1
+        Jogos["Gwent"] += 1
+        Jogos["Golf Simulator"] += 1
+        Jogos["XCOM 2"] += 1
+        
+    # Se o estilo de Jogo for Exploração:
+    elif EstiloDeJogo == 10:
+        Jogos["Minecraft"] += 1
+        Jogos["Resident Evil"] += 1
+        Jogos["Assassin's Creed"] += 1
+        Jogos["Slime Rancher"] += 1
+        Jogos["Just Cause"] += 1
+        Jogos["Outer Wilds"] += 1
+        Jogos["Star Wars: Jedi Fallen Order"] += 1
+        Jogos["ARK Survival"] += 1
+        Jogos["The Forest"] += 1
+        Jogos["The Witcher"] += 1
+        Jogos["Watch Dogs"] += 1
+        Jogos["Ghost of Tsushima"] += 1
+        Jogos["Elden Ring"] += 1
+        Jogos["FarCry"] += 1
+        Jogos["Read Dead Redemption 2"] += 1
+        Jogos["Cyberpunk"] += 1
+        Jogos["Hollow Knight"] += 1
+        
+    # Se o estilo de Jogo for Terror:
+    elif EstiloDeJogo == 11:
+        Jogos["Out Last"] += 1
+        Jogos["Resident Evil"] += 1
+        Jogos["Escape The Backrooms"] += 1
+        Jogos["Project Zomboid"] += 1
+
+    #Caso seja opção inválida:
+    if EstiloDeJogo > 11 or EstiloDeJogo < 1:
+        print("#-----------------------------------------#\n"
+            "Opção Inválida!!")
 
 #Caso seja opção inválida:
-if EstiloDeJogo > 11:
+except:
     print("#-----------------------------------------#\n"
-          "Opção Inválida!!")
+          "Valor inválido!!\n"
+          "#-----------------------------------------#\n")
+    sys.stderr = DevNull()
 
 #---------------------------------------------------------------------------------------------------------------------------------------------#
 
