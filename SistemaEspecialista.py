@@ -3,10 +3,17 @@ import sys
 class DevNull:
     def write(self, msg):
         pass
-
+    
 def calculoPorcentagem(value, perguntasFeitas):
     value: float = (100*value)/perguntasFeitas
     return value
+
+def valorInvalido():
+    print("#-----------------------------------------#\n"
+          "Valor inválido!!\n"
+          "#-----------------------------------------#\n")
+    sys.stderr = DevNull()
+    sys.exit()
 
 perguntasFeitas: int = 0
 Jogos: dict = {
@@ -80,7 +87,7 @@ try:
                             "[11] Terror\n"
                             "Digite sua opção: "))
     
-    perguntasFeitas +=1
+    perguntasFeitas += 1
 
     # Se o estilo de Jogo for FPS:
     if EstiloDeJogo == 1:
@@ -95,6 +102,7 @@ try:
         Jogos["Cyberpunk"] += 1
         Jogos["ARK Survival"] += 1
         Jogos["The Forest"] += 1
+        Jogos["Green Hell"] += 1
 
     # Se o estilo de Jogo for Battle Royale:
     elif EstiloDeJogo == 2:
@@ -192,6 +200,7 @@ try:
         Jogos["FarCry"] += 1
         Jogos["Read Dead Redemption 2"] += 1
         Jogos["Cyberpunk"] += 1
+        Jogos["Green Hell"] += 1
         Jogos["Hollow Knight"] += 1
         
     # Se o estilo de Jogo for Terror:
@@ -203,177 +212,327 @@ try:
 
     #Caso seja opção inválida:
     if EstiloDeJogo > 11 or EstiloDeJogo < 1:
-        print("#-----------------------------------------#\n"
-            "Opção Inválida!!")
+        exit(sys.exception)
 
 #Caso seja opção inválida:
 except:
-    print("#-----------------------------------------#\n"
-          "Valor inválido!!\n"
-          "#-----------------------------------------#\n")
-    sys.stderr = DevNull()
+    valorInvalido()
 
 #---------------------------------------------------------------------------------------------------------------------------------------------#
 
 # Se a pessoa quiser FPS:
 if EstiloDeJogo == 1:
     # Pergunta Modalidade:
-    Modalidade = int(input("#-----------------------------------------#\n"
-                           "Você deseja qual Modalidade de Jogos FPS?\n"
-                           "[1] Survival\n"
-                           "[2] Casual\n"
-                           "[3] Competitive\n"
-                           "Digite sua opção: "))
-    perguntasFeitas +=1
-
-    # Se a pessoa gosta de Survival:
-    if Modalidade == 1:
-        Jogos["FarCry"] += 1
-        Jogos["Green Hell"] += 1
-        Jogos["The Forest"] += 1
-        Jogos["ARK Survival"] += 1
-
-        Dificuldade = int(input("#-----------------------------------------#\n"
-                                "Você deseja qual dificuldade?\n"
-                                "[1] Normal\n"
-                                "[2] Difícil\n"
-                                "Digite sua opção: "))
-        perguntasFeitas +=1
+    try:
+        Modalidade = int(input("#-----------------------------------------#\n"
+                               "Você deseja qual Modalidade de Jogos FPS?\n"
+                               "[1] Survival\n"
+                               "[2] Casual\n"
+                               "[3] Competitive\n"
+                               "Digite sua opção: "))
+        perguntasFeitas += 1
         
-        # Se for Normal:
-        if Dificuldade == 1:
-            Jogos["FarCry"] += 1
-            Jogos["The Forest"] += 1
-            
-        # Se for Difícil:
-        elif Dificuldade == 2:
+        #Caso seja opção inválida:
+        if Modalidade > 3 or Modalidade < 1:
+            exit(sys.exception)           
+
+        # Se a pessoa gosta de Survival:
+        if Modalidade == 1:
             Jogos["Green Hell"] += 1
+            Jogos["The Forest"] += 1
             Jogos["ARK Survival"] += 1
 
-    # Se a pessoa gosta de Casual:
-    elif Modalidade == 2:
-        Jogos["The Forest"] += 1
-        Jogos["Cyberpunk"] += 1
-        Jogos["FarCry"] += 1
-        Jogos["Payday 2"] += 1
+            #Pergunta Dificuldade:
+            try:
+                Dificuldade = int(input("#-----------------------------------------#\n"
+                                        "Você deseja qual dificuldade?\n"
+                                        "[1] Normal\n"
+                                        "[2] Difícil\n"
+                                        "Digite sua opção: "))
+                perguntasFeitas += 1
+                
+                #Caso seja opção inválida:
+                if Dificuldade > 2 or Dificuldade < 1:
+                    exit(sys.exception)
         
-        Formato = int(input("#-----------------------------------------#\n"
-                            "Você deseja qual Formato?\n"
-                            "[1] História\n"
-                            "[2] Cooperativo\n"
-                            "Digite sua opção: "))
-        perguntasFeitas +=1
+                # Se for Normal:
+                if Dificuldade == 1:
+                    Jogos["The Forest"] += 1
+            
+                # Se for Difícil:
+                elif Dificuldade == 2:
+                    Jogos["Green Hell"] += 1
+                    Jogos["ARK Survival"] += 1
+
+                #Pergunta Preço:
+                Preco = int(input("#-----------------------------------------#\n"
+                                        "Você deseja pagar quanto pelo Jogo?\n"
+                                        "[1] R$ 30-40\n"
+                                        "[2] R$ 40-50\n"
+                                        "Digite sua opção: "))
+                perguntasFeitas += 1
+
+                 #Caso seja opção inválida:
+                if Preco > 2 or Preco < 1:
+                    exit(sys.exception)
         
-        # Se for História:
-        if Formato == 1:
-            Jogos["FarCry"] += 1
+                # Se for 30-40:
+                if Preco == 1:
+                    Jogos["The Forest"] += 1
+            
+                # Se for 40-50:
+                elif Preco == 2:
+                    Jogos["Green Hell"] += 1
+                    Jogos["ARK Survival"] += 1
+                
+            #Caso seja opção inválida:
+            except:
+                sys.stderr = DevNull()
+                exit(sys.exception)
+
+        # Se a pessoa gosta de Casual:
+        elif Modalidade == 2:
             Jogos["Cyberpunk"] += 1
-            
-        # Se for Cooperativo:
-        elif Formato == 2:
-            Jogos["The Forest"] += 1
+            Jogos["FarCry"] += 1
             Jogos["Payday 2"] += 1
+        
+            #Pergunta Formato:
+            try:
+                Formato = int(input("#-----------------------------------------#\n"
+                                    "Você deseja qual Formato?\n"
+                                    "[1] História\n"
+                                    "[2] Cooperativo\n"
+                                    "Digite sua opção: "))
+                perguntasFeitas += 1
+                
+                #Caso seja opção inválida:
+                if Formato > 2 or Formato < 1:
+                    exit(sys.exception)
+        
+                # Se for História:
+                if Formato == 1:
+                    Jogos["FarCry"] += 1
+                    Jogos["Cyberpunk"] += 1
             
-    # Se a pessoa gosta de Competitive:
-    elif Modalidade == 3:
-        Jogos["PUBG"] += 1
-        Jogos["Apex Legends"] += 1
-        Jogos["Counter-Strike 2"] += 1
-        Jogos["Call of Duty Mobile"] += 1
-        Jogos["Call of Duty Warzone"] += 1
-        Jogos["CrossFire"] += 1
+                # Se for Cooperativo:
+                elif Formato == 2:
+                    Jogos["Payday 2"] += 1
+
+                #Pergunta Estilo:
+                Estilo = int(input("#-----------------------------------------#\n"
+                                    "Você deseja qual Estilo?\n"
+                                    "[1] Futurista\n"
+                                    "[2] Realista\n"
+                                    "Digite sua opção: "))
+                perguntasFeitas += 1
+                
+                #Caso seja opção inválida:
+                if Estilo > 2 or Estilo < 1:
+                    exit(sys.exception)
+        
+                # Se for História:
+                if Estilo == 1:
+                    Jogos["Cyberpunk"] += 1
+            
+                # Se for Cooperativo:
+                elif Estilo == 2:
+                    Jogos["Payday 2"] += 1
+                    Jogos["FarCry"] += 1
+
+            #Caso seja opção inválida:
+            except:
+                sys.stderr = DevNull()
+                exit(sys.exception)
+            
+        # Se a pessoa gosta de Competitive:
+        elif Modalidade == 3:
+            Jogos["PUBG"] += 1
+            Jogos["Apex Legends"] += 1
+            Jogos["Counter-Strike 2"] += 1
+            Jogos["Call of Duty Mobile"] += 1
+            Jogos["Call of Duty Warzone"] += 1
+            Jogos["CrossFire"] += 1
+    
+    #Caso seja opção inválida:
+    except:
+        print("#-----------------------------------------#\n"
+              "Valor inválido!!\n"
+              "#-----------------------------------------#\n")
+        sys.stderr = DevNull()
+        sys.exit()
 
 #---------------------------------------------------------------------------------------------------------------------------------------------#
 
 # Se a pessoa quiser Battle Royale:
 if EstiloDeJogo == 2:
     # Pergunta Plataforma:
-    Plataforma = int(input("#-----------------------------------------#\n"
-                           "Você deseja jogar em qual Plataforma?\n"
-                            "[1] PC\n"
-                            "[2] Mobile\n"
-                            "[3] Console\n"
-                            "Digite sua opção: "))
-    perguntasFeitas +=1
+    try:
+        Plataforma = int(input("#-----------------------------------------#\n"
+                               "Você deseja jogar em qual Plataforma?\n"
+                                "[1] PC\n"
+                                "[2] Mobile\n"
+                                "[3] Console\n"
+                                "Digite sua opção: "))
+        perguntasFeitas += 1
+        
+        #Caso seja opção inválida:
+        if Plataforma > 3 or Plataforma < 1:
+            exit(sys.exception)
 
-    # Se a pessoa joga em PC:
-    if Plataforma == 1:
-        Jogos["PUBG"] += 1
-        Jogos["Fortnite"] += 1
-        Jogos["Call of Duty Warzone"] += 1
+        # Se a pessoa joga em PC:
+        if Plataforma == 1:
+            Jogos["PUBG"] += 1
+            Jogos["Fortnite"] += 1
+            Jogos["Call of Duty Warzone"] += 1
         
         # Pergunta Fantasia:
-        Fantasia = int(input("#-----------------------------------------#\n"
-                             "Você deseja jogar um jogo Realista ou com Fantasia?\n"
-                            "[1] Realista\n"
-                            "[2] Fantasia\n"
-                            "Digite sua opção: "))
-        perguntasFeitas +=1
+        try:
+            Fantasia = int(input("#-----------------------------------------#\n"
+                                 "Você deseja jogar um jogo Realista ou com Fantasia?\n"
+                                 "[1] Realista\n"
+                                 "[2] Fantasia\n"
+                                 "Digite sua opção: "))
+            perguntasFeitas += 1
         
-        # Se for Realista:
-        if Fantasia == 1:
-            Jogos["Call of Duty Warzone"] += 1
-            Jogos["PUBG"] += 1
+            #Caso seja opção inválida:
+            if Fantasia > 2 or Fantasia < 1:
+                exit(sys.exception)
+
+            # Se for Realista:
+            if Fantasia == 1:
+                Jogos["Call of Duty Warzone"] += 1
+                Jogos["PUBG"] += 1
             
-        # Se for Fantasia:
-        elif Fantasia == 2:
-            Jogos["Fortnite"] += 1
+            # Se for Fantasia:
+            elif Fantasia == 2:
+                Jogos["Fortnite"] += 1
+                
+        #Caso seja opção inválida:
+        except:
+            sys.stderr = DevNull()
+            exit(sys.exception)
       
-    # Se a pessoa joga em Mobile:
-    if Plataforma == 2:
-        Jogos["Free Fire"] += 1
+        # Se a pessoa joga em Mobile:
+        if Plataforma == 2:
+            Jogos["Free Fire"] += 1
       
-    # Se a pessoa joga em Console:
-    if Plataforma == 3:
-       Jogos["Fortnite"] += 1
-       Jogos["Call of Duty Warzone"] += 1
+        # Se a pessoa joga em Console:
+        if Plataforma == 3:
+           Jogos["Fortnite"] += 1
+           Jogos["Call of Duty Warzone"] += 1
        
-       # Pergunta Fantasia:
-       Fantasia = int(input("#-----------------------------------------#\n"
-                            "Você deseja jogar um jogo Realista ou com Fantasia?\n"
-                            "[1] Realista\n"
-                            "[2] Fantasia\n"
-                            "Digite sua opção: "))
-       perguntasFeitas +=1
+           # Pergunta Fantasia:
+           try:
+                Fantasia = int(input("#-----------------------------------------#\n"
+                                     "Você deseja jogar um jogo Realista ou com Fantasia?\n"
+                                     "[1] Realista\n"
+                                     "[2] Fantasia\n"
+                                     "Digite sua opção: "))
+                perguntasFeitas += 1
+           
+                #Caso seja opção inválida:
+                if Fantasia > 2 or Fantasia < 1:
+                    exit(sys.exception)
         
-       # Se for Realista:
-       if Fantasia == 1:
-            Jogos["Call of Duty Warzone"] += 1
+                # Se for Realista:
+                if Fantasia == 1:
+                    Jogos["Call of Duty Warzone"] += 1
             
-       # Se for Fantasia:
-       elif Fantasia == 2:
-            Jogos["Fortnite"] += 1
+                # Se for Fantasia:
+                elif Fantasia == 2:
+                    Jogos["Fortnite"] += 1
+                
+           #Caso seja opção inválida:
+           except:
+                sys.stderr = DevNull()
+                exit(sys.exception)
+            
+    #Caso seja opção inválida:
+    except:
+        print("#-----------------------------------------#\n"
+              "Valor inválido!!\n"
+              "#-----------------------------------------#\n")
+        sys.stderr = DevNull()
+        sys.exit()
 
 #---------------------------------------------------------------------------------------------------------------------------------------------#
 
 # Se a pessoa quiser Corrida:
 if EstiloDeJogo == 3:
-    # Pergunta Plataforma:
-    Plataforma = int(input("#-----------------------------------------#\n"
-                           "Você deseja Jogar em qual Plataforma?\n"
-                           "[1] PC\n"
-                           "[2] Mobile\n"
-                           "[3] Console\n"
-                           "Digite sua opção: "))
-    perguntasFeitas +=1
+    try:
+        # Pergunta Plataforma:
+        Plataforma = int(input("#-----------------------------------------#\n"
+                            "Você deseja Jogar em qual Plataforma?\n"
+                            "[1] PC\n"
+                            "[2] Mobile\n"
+                            "[3] Console\n"
+                            "Digite sua opção: "))
+        perguntasFeitas += 1
+
+        #Caso seja opção inválida:
+        if Plataforma > 3 or Plataforma < 1:
+            exit(sys.exception)
+        
+        # Se a pessoa joga em PC:
+        if Plataforma == 1:
+            Jogos["Rocket League"] += 1
+            Jogos["Forza"] += 1
+            Jogos["Need For Speed"] += 1
+
+            try:
+                #Pergunta Preço:
+                Preco = int(input("#-----------------------------------------#\n"
+                                        "Você deseja pagar quanto pelo Jogo?\n"
+                                        "[1] Grátis\n"
+                                        "[2] R$ 20-30\n"
+                                        "[3] R$ 30-40\n"
+                                        "[4] R$ 100+\n"
+                                        "Digite sua opção: "))
+                perguntasFeitas += 1
+
+                #Caso seja opção inválida:
+                if Preco > 4 or Preco < 1:
+                    exit(sys.exception)
+
+                #Caso seja Grátis:
+                if Preco == 1:
+                    Jogos["Rocket League"] += 1
+
+                #Caso seja 20-30:
+                if Preco == 2:
+                    Jogos["Need For Speed"] += 1
+
+                #Caso seja 30-40:
+                if Preco == 3:
+                    Jogos["Need For Speed"] += 1
+
+                #Caso seja 100+:
+                if Preco == 4:
+                    Jogos["Forza"] += 1
+            #Caso seja opção inválida:
+            except:
+                sys.stderr = DevNull()
+                exit(sys.exception)
+        
+        # Se a pessoa joga em Mobile:
+        if Plataforma == 2:
+            Jogos["Speed Drifters"] += 1
+            Jogos["Grid"] += 1
+        
+        # Se a pessoa joga em Console:
+        if Plataforma == 3:
+            Jogos["Rocket League"] += 1
+            Jogos["Forza"] += 1
+            Jogos["Mario Kart"] += 1
+            Jogos["Need For Speed"] += 1
     
-    # Se a pessoa joga em PC:
-    if Plataforma == 1:
-        Jogos["Rocket League"] += 1
-        Jogos["Forza"] += 1
-        Jogos["Need For Speed"] += 1
-      
-    # Se a pessoa joga em Mobile:
-    if Plataforma == 2:
-        Jogos["Speed Drifters"] += 1
-        Jogos["Grid"] += 1
-      
-    # Se a pessoa joga em Console:
-    if Plataforma == 3:
-       Jogos["Rocket League"] += 1
-       Jogos["Forza"] += 1
-       Jogos["Mario Kart"] += 1
-       Jogos["Need For Speed"] += 1
+    #Caso seja opção inválida:
+    except:
+        print("#-----------------------------------------#\n"
+              "Valor inválido!!\n"
+              "#-----------------------------------------#\n")
+        sys.stderr = DevNull()
+        sys.exit()
 
 #---------------------------------------------------------------------------------------------------------------------------------------------#
 
@@ -386,92 +545,125 @@ if EstiloDeJogo == 4:
                            "[2] \n"
                            "[3] \n"
                            "Digite sua opção: "))
-    perguntasFeitas +=1
+    perguntasFeitas += 1
 
 #---------------------------------------------------------------------------------------------------------------------------------------------#
 
 # Se a pessoa quiser MMORPG:
 if EstiloDeJogo == 5:
-    # Pergunta Preço:
-    Preco = int(input("#-----------------------------------------#\n"
-                      "Você deseja jogar de forma Grátis ou Paga?\n"
-                      "[1] Grátis\n"
-                      "[2] Pago\n"
-                      "Digite sua opção: "))
-    perguntasFeitas +=1
-    
-    # Se for Grátis:
-    if Preco == 1:
-        Jogos["Dauntless"] += 1
-        Jogos["Path of Exile"] += 1
-      
-    # Se for Pago:
-    if Preco == 2:
-        Jogos["New World"] += 1
-        Jogos["Albion Online"] += 1
+    try:
+        # Pergunta Preço:
+        Preco = int(input("#-----------------------------------------#\n"
+                          "Você deseja jogar de forma Grátis ou Paga?\n"
+                          "[1] Grátis\n"
+                          "[2] Pago\n"
+                          "Digite sua opção: "))
+        perguntasFeitas += 1
+
+        #Caso seja opção inválida:
+        if Preco > 2 or Preco < 1:
+            exit(sys.exception)
         
-    # Pergunta Estilo:
-    Estilo = int(input("#-----------------------------------------#\n"
-                       "Você deseja jogar um MMO de Fantasia?\n"
-                       "[1] Sim\n"
-                       "[2] Não\n"
-                       "Digite sua opção: "))
-    perguntasFeitas +=1
-    
-    # Se Sim:
-    if Estilo == 1:
-        Jogos["Dauntless"] += 1
-        Jogos["Path of Exile"] += 1 
+        # Se for Grátis:
+        if Preco == 1:
+            Jogos["Dauntless"] += 1
+            Jogos["Path of Exile"] += 1
         
-    # Se Não:
-    if Estilo == 2:
-        Jogos["New World"] += 1
-        Jogos["Albion Online"] += 1
+        # Se for Pago:
+        if Preco == 2:
+            Jogos["New World"] += 1
+            Jogos["Albion Online"] += 1
+            
+        # Pergunta Estilo:
+        Estilo = int(input("#-----------------------------------------#\n"
+                        "Você deseja jogar um MMO de Fantasia?\n"
+                        "[1] Sim\n"
+                        "[2] Não\n"
+                        "Digite sua opção: "))
+        perguntasFeitas += 1
+
+        #Caso seja opção inválida:
+        if Estilo > 2 or Estilo < 1:
+            exit(sys.exception)
+        
+        # Se Sim:
+        if Estilo == 1:
+            Jogos["Dauntless"] += 1
+            Jogos["Path of Exile"] += 1 
+            
+        # Se Não:
+        if Estilo == 2:
+            Jogos["New World"] += 1
+            Jogos["Albion Online"] += 1
+
+    #Caso seja opção inválida:
+    except:
+        print("#-----------------------------------------#\n"
+              "Valor inválido!!\n"
+              "#-----------------------------------------#\n")
+        sys.stderr = DevNull()
+        sys.exit()
 
 #---------------------------------------------------------------------------------------------------------------------------------------------#
 
 # Se a pessoa quiser Mobile:
 if EstiloDeJogo == 6:
-    # Pergunta Estrategia:
-    Estrategia = int(input("#-----------------------------------------#\n"
-                           "Você deseja jogar de forma Casual ou voltado a Estratégia?\n"
-                           "[1] Casual\n"
-                           "[2] Estratégia\n"
-                           "Digite sua opção: "))
-    perguntasFeitas +=1
-    
-    # Se for Casual:
-    if Estrategia == 1:
-        Jogos["Minecraft"] += 1
-        Jogos["Among Us"] += 1
-        Jogos["Roblox"] += 1
-      
-    # Se for Estratégia:
-    if Estrategia == 2:
-        Jogos["Hearthstone: Heroes of Warcraft"] += 1
-        Jogos["Call of Duty Mobile"] += 1
-        Jogos["Free Fire"] += 1
-      
-    # Pergunta Preço:
-    Preco = int(input("#-----------------------------------------#\n"
-                      "Você deseja jogar de forma Grátis ou Paga?\n"
-                      "[1] Grátis\n"
-                      "[2] Pago\n"
-                      "Digite sua opção: "))
-    perguntasFeitas +=1
-    
-    # Se for Grátis:
-    if Preco == 1:
-        Jogos["Among Us"] += 1
-        Jogos["Roblox"] += 1
-        Jogos["Free Fire"] += 1
-        Jogos["Call of Duty Mobile"] += 1
-      
-    # Se for Pago:
-    if Preco == 2:
-        Jogos["Minecraft"] += 1
-        Jogos["Hearthstone: Heroes of Warcraft"] += 1
+    try:
+        # Pergunta Estrategia:
+        Estrategia = int(input("#-----------------------------------------#\n"
+                            "Você deseja jogar de forma Casual ou voltado a Estratégia?\n"
+                            "[1] Casual\n"
+                            "[2] Estratégia\n"
+                            "Digite sua opção: "))
+        perguntasFeitas += 1
+
+        #Caso seja opção inválida:
+        if Estrategia > 2 or Estrategia < 1:
+            exit(sys.exception)
         
+        # Se for Casual:
+        if Estrategia == 1:
+            Jogos["Minecraft"] += 1
+            Jogos["Among Us"] += 1
+            Jogos["Roblox"] += 1
+        
+        # Se for Estratégia:
+        if Estrategia == 2:
+            Jogos["Hearthstone: Heroes of Warcraft"] += 1
+            Jogos["Call of Duty Mobile"] += 1
+            Jogos["Free Fire"] += 1
+        
+        # Pergunta Preço:
+        Preco = int(input("#-----------------------------------------#\n"
+                        "Você deseja jogar de forma Grátis ou Paga?\n"
+                        "[1] Grátis\n"
+                        "[2] Pago\n"
+                        "Digite sua opção: "))
+        perguntasFeitas += 1
+
+        #Caso seja opção inválida:
+        if Preco > 2 or Preco < 1:
+            exit(sys.exception)
+        
+        # Se for Grátis:
+        if Preco == 1:
+            Jogos["Among Us"] += 1
+            Jogos["Roblox"] += 1
+            Jogos["Free Fire"] += 1
+            Jogos["Call of Duty Mobile"] += 1
+        
+        # Se for Pago:
+        if Preco == 2:
+            Jogos["Minecraft"] += 1
+            Jogos["Hearthstone: Heroes of Warcraft"] += 1
+
+    #Caso seja opção inválida:
+    except:
+        print("#-----------------------------------------#\n"
+              "Valor inválido!!\n"
+              "#-----------------------------------------#\n")
+        sys.stderr = DevNull()
+        sys.exit()
 
 #---------------------------------------------------------------------------------------------------------------------------------------------#
 
@@ -483,7 +675,7 @@ if EstiloDeJogo == 7:
                       "[1] Hack and Slash\n"
                       "[2] 2D Casual\n"
                       "Digite sua opção: "))
-    perguntasFeitas +=1
+    perguntasFeitas += 1
     
     # Se for Hack and Slash:
     if Estilo == 1:
@@ -503,7 +695,7 @@ if EstiloDeJogo == 8:
                       "[1] Souls Like Difícil\n"
                       "[2] 2D Casual\n"
                       "Digite sua opção: "))
-    perguntasFeitas +=1
+    perguntasFeitas += 1
     
     # Se for Souls Like Difícil:
     if Estilo == 1:
@@ -522,7 +714,7 @@ if EstiloDeJogo == 8:
                        "[1] Sim\n"
                        "[2] Não\n"
                        "Digite sua opção: "))
-    perguntasFeitas +=1
+    perguntasFeitas += 1
     
     # Se Sim:
     if Modelo == 1:
@@ -545,7 +737,7 @@ if EstiloDeJogo == 9:
                        "[1] Competitive\n"
                        "[2] Casual\n"
                        "Digite sua opção: "))
-    perguntasFeitas +=1
+    perguntasFeitas += 1
 
     # Se for Competitive:
     if Estilo == 1:
@@ -568,7 +760,7 @@ if EstiloDeJogo == 9:
                        "[3] Fantasia\n"
                        "[4] Em Turnos\n"
                        "Digite sua opção: "))
-    perguntasFeitas +=1
+    perguntasFeitas += 1
     
     # Se for Cartas:
     if Modelo == 1:
@@ -601,7 +793,7 @@ if EstiloDeJogo == 10:
                            "[2] \n"
                            "[3] \n"
                            "Digite sua opção: "))
-    perguntasFeitas +=1
+    perguntasFeitas += 1
 
 #---------------------------------------------------------------------------------------------------------------------------------------------#
 
@@ -614,7 +806,7 @@ if EstiloDeJogo == 11:
                            "[2] Escape Room\n"
                            "[3] Terror Psicológico\n"
                            "Digite sua opção: "))
-    perguntasFeitas +=1
+    perguntasFeitas += 1
     
     # Se for História:
     if Modalidade == 1:
