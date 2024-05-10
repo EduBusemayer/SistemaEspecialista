@@ -1257,13 +1257,13 @@ print("#-----------------------------------------#\n")
 for i in ordenado:
     for a in range(3):
         if a > 1:
-            value = calculoPorcentagem(i[1], perguntasFeitas)
+            value = round(calculoPorcentagem(i[1], perguntasFeitas), 1)
             if value == 100:
                 print(f"Recomendo você jogar {i[0]}. ({value}%)")
 print()
 for i in ordenado:
     for a in range(3):
         if a > 1:
-            value = calculoPorcentagem(i[1], perguntasFeitas)
+            value = round(calculoPorcentagem(i[1], perguntasFeitas), 1)
             if value > 0 and value < 100:
                 print(f"Você também pode gostar de {i[0]}. ({value}%)")
