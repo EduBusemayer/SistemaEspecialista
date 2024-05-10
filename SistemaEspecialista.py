@@ -388,32 +388,32 @@ if EstiloDeJogo == 2:
             Jogos["Fortnite"] += 1
             Jogos["Call of Duty Warzone"] += 1
         
-        # Pergunta Fantasia:
-        try:
-            Fantasia = int(input("#-----------------------------------------#\n"
-                                 "Você deseja jogar um jogo Realista ou com Fantasia?\n"
-                                 "[1] Realista\n"
-                                 "[2] Fantasia\n"
-                                 "Digite sua opção: "))
-            perguntasFeitas += 1
-        
-            # Caso seja opção inválida:
-            if Fantasia > 2 or Fantasia < 1:
-                exit(sys.exception)
-
-            # Se for Realista:
-            if Fantasia == 1:
-                Jogos["Call of Duty Warzone"] += 1
-                Jogos["PUBG"] += 1
+            # Pergunta Fantasia:
+            try:
+                Fantasia = int(input("#-----------------------------------------#\n"
+                                    "Você deseja jogar um jogo Realista ou com Fantasia?\n"
+                                    "[1] Realista\n"
+                                    "[2] Fantasia\n"
+                                    "Digite sua opção: "))
+                perguntasFeitas += 1
             
-            # Se for Fantasia:
-            elif Fantasia == 2:
-                Jogos["Fortnite"] += 1
+                # Caso seja opção inválida:
+                if Fantasia > 2 or Fantasia < 1:
+                    exit(sys.exception)
+
+                # Se for Realista:
+                if Fantasia == 1:
+                    Jogos["Call of Duty Warzone"] += 1
+                    Jogos["PUBG"] += 1
                 
-        # Caso seja opção inválida:
-        except:
-            sys.stderr = DevNull()
-            exit(sys.exception)
+                # Se for Fantasia:
+                elif Fantasia == 2:
+                    Jogos["Fortnite"] += 1
+                    
+            # Caso seja opção inválida:
+            except:
+                sys.stderr = DevNull()
+                exit(sys.exception)
       
         # Se a pessoa joga em Mobile:
         if Plataforma == 2:
@@ -1107,6 +1107,35 @@ if EstiloDeJogo == 10:
             Jogos["FarCry"] += 1
             Jogos["Read Dead Redemption 2"] += 1
 
+            try:
+                # Pergunta Estilo:
+                Estilo = int(input("#-----------------------------------------#\n"
+                                    "Você deseja uma Exploração com armas mais Atuais ou Clássicas?\n"
+                                    "[1] Armas Atuais\n"
+                                    "[2] Armas Clássicas\n"
+                                    "Digite sua opção: "))
+                perguntasFeitas += 1
+
+                # Caso seja opção Inválida
+                if Estilo > 2 or Estilo < 1:
+                    exit(sys.exception)
+
+                # Se for Armas Atuais:
+                if Estilo == 1:
+                    Jogos["FarCry"] += 1
+                    Jogos["Read Dead Redemption 2"] += 1
+                    Jogos["Just Cause"] += 1
+
+                # Se for Armas Clássicas:
+                if Estilo == 2:
+                    Jogos["Ghost of Tsushima"] += 1
+                    Jogos["Assassin's Creed"] += 1
+
+            # Caso seja opção Inválida
+            except:
+                sys.stderr = DevNull()
+                exit(sys.exception)
+
         # Caso seja Futurista:
         if Modelo == 5:
             Jogos["ARK Survival"] += 1
@@ -1114,12 +1143,68 @@ if EstiloDeJogo == 10:
             Jogos["Cyberpunk"] += 1
             Jogos["Star Wars: Jedi Fallen Order"] += 1
 
+            try:
+                # Pergunta Estilo:
+                Estilo = int(input("#-----------------------------------------#\n"
+                                    "Você deseja uma Exploração com armas mais Fictícias ou Clássicas?\n"
+                                    "[1] Armas Fictícias\n"
+                                    "[2] Armas Clássicas\n"
+                                    "Digite sua opção: "))
+                perguntasFeitas += 1
+
+                # Caso seja opção Inválida
+                if Estilo > 2 or Estilo < 1:
+                    exit(sys.exception)
+
+                # Se for Armas Fictícias:
+                if Estilo == 1:
+                    Jogos["Star Wars: Jedi Fallen Order"] += 1
+
+                # Se for Armas Clássicas:
+                if Estilo == 2:
+                    Jogos["ARK Survival"] += 1
+                    Jogos["Watch Dogs"] += 1
+                    Jogos["Cyberpunk"] += 1
+
+            # Caso seja opção Inválida
+            except:
+                sys.stderr = DevNull()
+                exit(sys.exception)
+
         # Caso seja Difícil:
         if Modelo == 6:
             Jogos["Green Hell"] += 1
             Jogos["Ghost of Tsushima"] += 1
             Jogos["Elden Ring"] += 1
             Jogos["ARK Survival"] += 1
+
+            try:
+                # Pergunta Estilo:
+                Estilo = int(input("#-----------------------------------------#\n"
+                                   "Você deseja uma Exploração com elementos de Sobrevivência?\n"
+                                   "[1] Sim\n"
+                                   "[2] Não\n"
+                                   "Digite sua opção: "))
+                perguntasFeitas += 1
+
+                # Caso seja opção Inválida
+                if Estilo > 2 or Estilo < 1:
+                    exit(sys.exception)
+
+                # Se for Sim:
+                if Estilo == 1:
+                    Jogos["Green Hell"] += 1
+                    Jogos["ARK Survival"] += 1
+
+                # Se for Não:
+                if Estilo == 2:
+                    Jogos["Ghost of Tsushima"] += 1
+                    Jogos["Elden Ring"] += 1
+
+            # Caso seja opção Inválida
+            except:
+                sys.stderr = DevNull()
+                exit(sys.exception)
 
     # Caso seja opção Inválida:
     except:
@@ -1173,5 +1258,12 @@ for i in ordenado:
     for a in range(3):
         if a > 1:
             value = calculoPorcentagem(i[1], perguntasFeitas)
-            if value > 0:
-              print(f"Você poderia gostaria de {i[0]}, com {value:.2F}% de semelhança em relação as suas Respostas.")
+            if value == 100:
+                print(f"Recomendo você jogar {i[0]}. ({value}%)")
+print()
+for i in ordenado:
+    for a in range(3):
+        if a > 1:
+            value = calculoPorcentagem(i[1], perguntasFeitas)
+            if value > 0 and value < 100:
+                print(f"Você também pode gostar de {i[0]}. ({value}%)")
